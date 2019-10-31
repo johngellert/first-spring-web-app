@@ -21,27 +21,32 @@ public class PersonController {
         this.personService = personService;
     }
 
+    // add a perosn
     @PostMapping
     public void addPerson(@Valid @NotNull @RequestBody Person person) {
         personService.addPerson(person);
     }
 
+    // ger all people
     @GetMapping
     public List<Person> getAllPeople() {
         return personService.getAllPeople();
     }
 
+    // get a single person by id
     @GetMapping(path = "{id}")
     public Person getPersonById(@PathVariable("id") UUID id) {
         return personService.getPersonById(id)
                 .orElse(null);
     }
 
+    // delete a single person by id
     @DeleteMapping(path = "{id}")
     public void deletePersonById(@PathVariable("id") UUID id) {
         personService.deletePerson(id);
     }
 
+    // update a dingle person by id
     @PutMapping(path = "{id}")
     public void updatePerson(@PathVariable("id") UUID id, @Valid @NotNull @RequestBody Person personToUpdate) {
         personService.updatePerson(id, personToUpdate);
